@@ -2,6 +2,9 @@ import pymeshlab
 from scipy.optimize import least_squares
 import numpy as np
 
+# USEFUL HINTS:
+# https://slicer.readthedocs.io/en/latest/developer_guide/script_repository.html#specify-a-sphere-by-multiple-control-points
+
 plotting = True
 
 ms = pymeshlab.MeshSet()
@@ -37,6 +40,8 @@ if plotting:
 
     sphere = Sphere(center, radius)
     pointData = Points(points)
+    center = np.round(center, 3)
+    radius = np.round(radius, 3)
 
     plt.close('all')
     fig = plt.figure(tight_layout=True)
@@ -45,7 +50,6 @@ if plotting:
     sphere.plot_3d(ax, alpha=0.2)
 	sphere.point.plot_3d(ax, s=0.1)
     sphere.point.plot_3d(ax, s=100)
-    plt.title(f'Sphere\ncenter: {round(center[0],3)}, {round(center[1],3)}, {round(center[2],3)}\nradius: {round(radius,3)}')
+    plt.title(f'Sphere\ncenter: {center[0]}, {center[1]}, {center[2]}\nradius: {radius}')
     plt.savefig('fittedSphere.png')
-
     plt.show(block=False)
