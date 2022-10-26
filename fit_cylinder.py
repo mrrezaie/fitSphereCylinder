@@ -22,14 +22,14 @@ lb = np.ones(7) * -np.inf
 ub = np.ones(7) * +np.inf
 
 def cylinderResiduals(parameters):
-    endPoint1 = parameters[0:3]
-    endPoint2 = parameters[3:6]
+    p1 = parameters[0:3] # first 3D point
+    p2 = parameters[3:6] # second 3D point
     radius = parameters[6]
 
-    v1 = endPoint1-endPoint2 # 1D (vector) axis of the cylinder
-    v2 = points-endPoint1 # 2D vector between points and the cylinder axis
+    v1 = p1-p2 # 1D (vector) axis of the cylinder
+    v2 = points-p1 # 2D vector between points and the cylinder axis
     v3 = np.cross(v1,v2) # 2D perpendicular vector
-    closetstDist = np.linalg.norm(v3, axis=1)/ np.linalg.norm(v1)
+    closetstDist = np.linalg.norm(v3, axis=1)/ np.linalg.norm(v1) # perpendicular distance to axis
     return closetstDist - radius
 
 out = least_squares(cylinderResiduals, init, bounds=(lb,ub), method='trf', jac='3-point')['x']

@@ -25,9 +25,9 @@ def calcSphereResiduals(parameters):
 	dist = np.linalg.norm(points-values, ord=2, axis=1) # distance between points and estimated center
 	return dist - radius	
 
-out = least_squares(calcSphereResiduals, init, bounds=(lb,ub), method='trf', jac='3-point')
-center = out['x'][:3]
-radius = out['x'][3]
+out = least_squares(calcSphereResiduals, init, bounds=(lb,ub), method='trf', jac='3-point')['x']
+center = out[:3]
+radius = out[3]
 print('center:', center)
 print('radius:', radius)
 
