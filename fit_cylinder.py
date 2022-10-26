@@ -26,9 +26,9 @@ def cylinderResiduals(parameters):
     endPoint2 = parameters[3:6]
     radius = parameters[6]
 
-    v1 = endPoint1-endPoint2 # (vector) axis of the cylinder
-    v2 = points-endPoint1 # vector between points and the cylinder axis
-    v3 = np.cross(v1,v2) # perpendicular vector
+    v1 = endPoint1-endPoint2 # 1D (vector) axis of the cylinder
+    v2 = points-endPoint1 # 2D vector between points and the cylinder axis
+    v3 = np.cross(v1,v2) # 2D perpendicular vector
     closetstDist = np.linalg.norm(v3, axis=1)/ np.linalg.norm(v1)
     return closetstDist - radius
 
@@ -65,7 +65,7 @@ if plot:
     p2     = np.round(p2    , 3)
 
     plt.close('all')
-    fig = plt.figure(figsize=(), tight_layout=True)
+    fig = plt.figure(tight_layout=True)
     ax = fig.add_subplot(projection='3d')
     pointData.plot_3d(ax, c='b', s=1, depthshade=False)
     point.plot_3d(ax, s=100)
